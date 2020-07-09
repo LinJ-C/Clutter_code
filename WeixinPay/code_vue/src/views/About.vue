@@ -10,23 +10,24 @@
     name: "About",
     data() {
       return {
-          text:'weixin://wxpay/bizpayurl?pr=OzARo3c'
+          text:''
       }
     },
     mounted: function () {
       this.$nextTick(function () {
-        this.bindQRCode();
+          const _this =this;
+          this.axios.get("http://localhost:8080/weixin/pay/create/native?outtradeno=500001012&totalfee=1").then((res)=>{
+              // console.log(res)
+              var data = res.data.map
+              // console.log(data.code_url)
+              this.text = data.code_url
+              console.log(this.text)
+              this.bindQRCode();
+          })
       })
     },
     methods: {
       bindQRCode: function () {
-          const _this =this;
-          this.axios.get("http://localhost:8080/weixin/pay/create/native?outtradeno=400001012&totalfee=1").then((res)=>{
-              // console.log(res)
-              var data = res.data.map
-              // console.log(data.code_url)
-              _this.text = data.code_url
-          })
         new QRCode(this.$refs.qrCodeDiv, {
           text: this.text,
           width: 200,
