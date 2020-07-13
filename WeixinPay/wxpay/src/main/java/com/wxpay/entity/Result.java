@@ -30,14 +30,14 @@ public class Result<M> implements Serializable {
         m.setData(data);
         return m;
     }
-    public static Result succ(Map<String,String> map){
+
+    public static Result succ(Map<String,String> map ,String msg) {
         Result m = new Result();
         m.setCode(200);
         m.setMap(map);
+        m.setMsg(msg);
         return m;
     }
-
-
 
     public static Result fail(String msg){
         return succ(400,msg, null);

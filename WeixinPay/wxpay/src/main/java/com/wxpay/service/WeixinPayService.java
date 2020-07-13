@@ -11,5 +11,7 @@ public interface WeixinPayService {
 
     //创建二维码操作
     Map createNative(Map<String,String> paramaterMap);
+    //查询微信支付状态
+    Map queryStatus(String outtradeno);
 
 }
