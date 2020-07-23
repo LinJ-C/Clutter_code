@@ -63,6 +63,17 @@ public class BlogController {
     }
 
     @RequiresAuthentication
+    @GetMapping("/blog/top/{id}")
+    public Result top(@PathVariable(name = "id") Long id){
+        Blog temp = blogService.getById(id);
+        //只能置顶自己的文章
+        Assert.isTrue(temp.getUserId().longValue() == ShiroUtil.getProfile().getId().longValue(),"没有权限删除此文章");
+        temp.setCreated(LocalDateTime.now());
+        Assert.isTrue(blogService.saveOrUpdate(temp),"置顶失败！");
+        return  Result.succ("置顶成功！");
+    }
+
+    @RequiresAuthentication
     @PostMapping("/blog/edit")
     public Result edit(@Validated @RequestBody Blog blog){
 
