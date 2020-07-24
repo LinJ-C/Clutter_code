@@ -1,6 +1,9 @@
 <template>
     <div >
         <Header></Header>
+        <div class="count">
+        <span class="el-icon-view">{{count}}</span>
+        </div>
         <div class="block">
             <el-timeline>
                 <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs">
@@ -37,7 +40,8 @@
                 blogs:{},
                 currentPage:1,
                 total:0,
-                pageSize:5
+                pageSize:5,
+                count:7,
             }
         },
         methods:{
@@ -54,7 +58,15 @@
 
         },
         created() {
+            if(sessionStorage.getItem("con")==null){
+                sessionStorage.setItem("con",'7')
+            }
+            else{
+                this.count = parseInt(sessionStorage.getItem("con"))+1
+                sessionStorage.setItem("con",this.count)
+            }
             this.page(1)
+            this.count=this.count+1
         }
     }
 </script>
@@ -63,5 +75,8 @@
     .mpage{
         margin: 0 auto;
         text-align: center;
+    }
+    .count{
+        text-align: right;
     }
 </style>

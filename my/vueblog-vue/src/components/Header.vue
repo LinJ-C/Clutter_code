@@ -15,6 +15,7 @@
             <span><el-link v-show="!haslogin" @click="login"type="primary">登录</el-link></span>
 
             <span><el-link v-show="haslogin" @click="logout" type="danger">退出</el-link></span>
+
         </div>
     </div>
 </template>
