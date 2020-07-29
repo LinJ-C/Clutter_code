@@ -43,7 +43,7 @@
                     description:'摘要',
                     content:"内容",
                     ownBlog:false,
-                }
+                },
             }
         },
         methods: {
